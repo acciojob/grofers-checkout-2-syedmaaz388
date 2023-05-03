@@ -1,22 +1,14 @@
-//your code here
-function calculateTotalPrice() {
-      const priceElements = document.querySelectorAll('[data-ns-test="prices"]');
-      let totalPrice = 0;
+const table = document.querySelector('table');
+ const lastRow = document.createElement('tr');
+ const prices = document.querySelectorAll('[data-ns-test=price]');
+ let sum = 0;
+ for(let i = 0; i < prices.length; i++) {
+  sum += parseInt(prices[i].textContent);
+ }
+ const child = document.createElement("td");
+ child.setAttribute('data-ns-test', 'grandTotal');
 
-      priceElements.forEach((element) => {
-        const price = parseFloat(element.textContent);
-        totalPrice += price;
-      });
 
-      const grandTotalRow = document.createElement('tr');
-      const grandTotalCell = document.createElement('td');
-      grandTotalCell.setAttribute('colspan', '2');
-      grandTotalCell.setAttribute('data-ns-test', 'grandTotal');
-      grandTotalCell.textContent = 'Total Price: $' + totalPrice.toFixed(2);
-      grandTotalRow.appendChild(grandTotalCell);
-
-      const groceryTable = document.getElementById('groceryTable');
-      groceryTable.appendChild(grandTotalRow);
-    }
-
-    calculateTotalPrice();
+ child.textContent = sum;
+ lastRow.appendChild(child);
+ table.appendChild(lastRow);
